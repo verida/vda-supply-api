@@ -1,5 +1,6 @@
 import fs from 'fs';
 import csvParser from 'csv-parser';
+import Axios from 'axios'
 
 // Define the type for each row of the CSV
 export interface CSVRow {
@@ -48,4 +49,37 @@ export async function getMonthValues(month: number, year: number) {
     
     const resultRow: CSVRow = <CSVRow> await promise
     return resultRow
+}
+
+export async function getAllocations() {
+    const API_KEY = process.env.MAGNA_KEY
+    const URL = process.env.MAGNA_ENDPOINT_URL
+    const VDA_TOKEN_ID = process.env.MAGNA_VDA_TOKEN_ID
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'x-magna-api-token': API_KEY
+    }
+    const requestData = {
+        tokenId: VDA_TOKEN_ID,
+        limit: 100
+    };
+
+    try {
+        const response = await Axios.post(URL, requestData, { headers })
+        return response.data.result.items
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+export async function getDistributedFromMagna() {
+    const allocations = await getAllocations()
+    let total = 0
+
+    allocations.forEach((allocation: any) => {
+        total += parseInt(allocation.received)
+    })
+
+    return total
 }

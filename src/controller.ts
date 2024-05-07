@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { CSVRow, getMonthValues } from './utils';
+import { CSVRow, getAllocations, getDistributedFromMagna, getMonthValues } from './utils';
 
 
 /**
@@ -23,7 +23,8 @@ export default class Controller {
             total += parseInt(monthValues[poolName].replace(/[^0-9]/g, ''))
         })
 
-        // @todo: Add data from Magna API for the remaining token pools
+        const distributedTokens = await getDistributedFromMagna()
+        total += distributedTokens
         
         console.log(`Returning total: ${total}`)
         return res.status(200).send(total.toString());
