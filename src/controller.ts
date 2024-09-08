@@ -7,7 +7,7 @@ import { CSVRow, getAllocations, getDistributedFromMagna, getMonthValues } from 
  */
 export default class Controller {
 
-    public static async circulating(req: Request, res: Response, next: any) {
+    public static async getCirculating() {
         const currentDate = new Date()
 
         const monthValues: CSVRow = await getMonthValues(currentDate.getMonth()+1,currentDate.getFullYear())
@@ -27,11 +27,29 @@ export default class Controller {
         total += distributedTokens
         
         console.log(`Returning total: ${total}`)
+        return total
+    }
+
+    public static async circulating(req: Request, res: Response, next: any) {
+        const total = await Controller.getCirculating()
         return res.status(200).send(total.toString());
     }
 
     public static async total(req: Request, res: Response, next: any) {
         return res.status(200).send("1000000000");
+    }
+
+    public static async cgCirculating(req: Request, res: Response, next: any) {
+        const total = await Controller.getCirculating()
+        return res.status(200).send({
+            result: total
+        });
+    }
+
+    public static async cgTotal(req: Request, res: Response, next: any) {
+        return res.status(200).send({
+            result: 1000000000
+        });
     }
 
 }
