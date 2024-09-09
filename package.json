@@ -17,17 +17,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/verida/vda-token-supply.git"
+    "url": "git+https://github.com/verida/vda-supply-api.git"
   },
   "author": "Verida",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/verida/vda-token-supply/issues"
+    "url": "https://github.com/verida/vda-supply-api/issues"
   },
   "engines": {
     "node": ">=16.06"
   },
-  "homepage": "https://github.com/verida/vda-token-supply#readme",
+  "homepage": "https://github.com/verida/vda-supply-apiy#readme",
   "dependencies": {
     "aws-serverless-express": "^3.4.0",
     "axios": "^1.6.8",

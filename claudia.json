@@ -1,10 +1,10 @@
 {
-    "lambda": {
-      "role": "vda_token_supply-executor",
-      "name": "vda_token_supply-connector",
-      "region": "us-east-1"
-    },
-    "api": {
-      "id": "???"
-    }
+  "lambda": {
+    "role": "verida_vda-token-supply-executor",
+    "name": "verida_vda-token-supply",
+    "region": "us-east-1"
+  },
+  "api": {
+    "id": "mmc4zpgwl6"
   }
+}
